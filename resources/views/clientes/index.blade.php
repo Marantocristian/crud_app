@@ -14,7 +14,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Nombre Completo</th>
                     <th>Email</th>
                     <th>Telefono</th>
                     <th>Direccion</th>
