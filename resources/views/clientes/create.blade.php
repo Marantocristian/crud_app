@@ -14,7 +14,7 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nombre</label>
+                        <label for="name" class="form-label">Nombre Completo</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                id="name" name="name" value="{{ old('name') }}" required autofocus>
                         @error('name')
