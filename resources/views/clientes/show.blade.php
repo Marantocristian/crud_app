@@ -20,7 +20,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 fw-bold">Nombre Completo:</div>
-                    <div class="col-sm-9">{{ $cliente->name }}</div>
+                    <div class="col-sm-9">{{ $cliente->nombre_completo }}</div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 fw-bold">Email:</div>

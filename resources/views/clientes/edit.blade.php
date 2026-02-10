@@ -15,10 +15,10 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                               id="name" name="name" value="{{ old('name', $cliente->name) }}" required autofocus>
-                        @error('name')
+                        <label for="nombre_completo" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control @error('nombre_completo') is-invalid @enderror"
+                               id="nombre_completo" name="nombre_completo" value="{{ old('nombre_completo', $cliente->nombre_completo) }}" required autofocus>
+                        @error('nombre_completo')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

@@ -25,7 +25,7 @@
                 @foreach($clientes as $cliente)
                 <tr>
                     <td>{{ $cliente->id }}</td>
-                    <td>{{ $cliente->name }}</td>
+                    <td>{{ $cliente->nombre_completo }}</td>
                     <td>{{ $cliente->email }}</td>
                     <td>{{ $cliente->phone }}</td>
                     <td>{{ Str::limit($cliente->address, 50) }}</td>

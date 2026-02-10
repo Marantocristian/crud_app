@@ -14,7 +14,7 @@ class StoreClienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'nombre_completo' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:clientes,email'],
             'phone' => ['nullable', 'string', 'max:50'],
             'address' => ['nullable', 'string', 'max:255']
@@ -24,7 +24,7 @@ class StoreClienteRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
+            'nombre_completo' => 'nombre completo',
             'email' => 'email',
             'phone' => 'telefono',
             'address' => 'direccion'
@@ -34,7 +34,7 @@ class StoreClienteRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'El nombre es obligatorio.',
+            'nombre_completo.required' => 'El nombre completo es obligatorio.',
             'email.required' => 'El email es obligatorio.',
             'email.email' => 'El email no es valido.',
             'email.unique' => 'Ya existe un cliente con este email.'
