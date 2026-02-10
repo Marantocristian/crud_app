@@ -36,7 +36,7 @@ class ClienteController extends Controller
             $cliente = $this->clienteService->createCliente($request->validated());
 
             return redirect()->route('clientes.index')
-                ->with('success', "Cliente '{$cliente->full_name}' creado exitosamente.");
+                ->with('success', "Cliente '{$cliente->nombre_completo}' creado exitosamente.");
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -60,7 +60,7 @@ class ClienteController extends Controller
             $updatedCliente = $this->clienteService->updateCliente($cliente, $request->validated());
 
             return redirect()->route('clientes.index')
-                ->with('success', "Cliente '{$updatedCliente->full_name}' actualizado exitosamente.");
+                ->with('success', "Cliente '{$updatedCliente->nombre_completo}' actualizado exitosamente.");
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -71,7 +71,7 @@ class ClienteController extends Controller
     public function destroy(ClienteModel $cliente): RedirectResponse
     {
         try {
-            $clienteName = $cliente->full_name;
+            $clienteName = $cliente->nombre_completo;
             $this->clienteService->deleteCliente($cliente);
 
             return redirect()->route('clientes.index')
