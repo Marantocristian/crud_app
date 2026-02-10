@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Schema::hasColumn('clientes', 'name') && !Schema::hasColumn('clientes', 'nombre_completo')) {
-            DB::statement('ALTER TABLE clientes RENAME COLUMN name TO nombre_completo');
+        if (Schema::hasColumn('clientes', 'name') && !Schema::hasColumn('clientes', 'full_name')) {
+            DB::statement('ALTER TABLE clientes RENAME COLUMN name TO full_name');
         }
     }
 
     public function down(): void
     {
-        if (Schema::hasColumn('clientes', 'nombre_completo') && !Schema::hasColumn('clientes', 'name')) {
-            DB::statement('ALTER TABLE clientes RENAME COLUMN nombre_completo TO name');
+        if (Schema::hasColumn('clientes', 'full_name') && !Schema::hasColumn('clientes', 'name')) {
+            DB::statement('ALTER TABLE clientes RENAME COLUMN full_name TO name');
         }
     }
 };

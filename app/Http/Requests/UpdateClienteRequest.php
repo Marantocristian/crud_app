@@ -16,7 +16,7 @@ class UpdateClienteRequest extends FormRequest
         $clienteId = $this->route('cliente')->id;
 
         return [
-            'nombre_completo' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', "unique:clientes,email,{$clienteId}"],
             'phone' => ['nullable', 'string', 'max:50'],
             'address' => ['nullable', 'string', 'max:255']
@@ -26,7 +26,7 @@ class UpdateClienteRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'nombre_completo' => 'nombre completo',
+            'full_name' => 'nombre completo',
             'email' => 'email',
             'phone' => 'telefono',
             'address' => 'direccion'
@@ -36,7 +36,7 @@ class UpdateClienteRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nombre_completo.required' => 'El nombre completo es obligatorio.',
+            'full_name.required' => 'El nombre completo es obligatorio.',
             'email.required' => 'El email es obligatorio.',
             'email.email' => 'El email no es valido.',
             'email.unique' => 'Ya existe otro cliente con este email.'
