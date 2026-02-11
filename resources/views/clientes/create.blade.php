@@ -25,21 +25,21 @@
     }
 
     .cliente-dark-input {
-        background-color: #344056;
-        border: 1px solid #44526c;
-        color: #f8fafc;
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #0f172a;
         border-radius: 10px;
         padding: 0.72rem 0.9rem;
     }
 
     .cliente-dark-input::placeholder {
-        color: #b6c2d7;
+        color: #64748b;
     }
 
     .cliente-dark-input:focus {
-        background-color: #344056;
+        background-color: #ffffff;
         border-color: #5b6e91;
-        color: #f8fafc;
+        color: #0f172a;
         box-shadow: 0 0 0 0.2rem rgba(72, 125, 255, 0.25);
     }
 
