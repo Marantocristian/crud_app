@@ -30,7 +30,7 @@
                     <td>{{ $cliente->telefono }}</td>
                     <td>{{ Str::limit($cliente->direccion, 50) }}</td>
                     <td>
-                        <div class="btn-group" role="group">
+                        <div class="d-flex gap-2" role="group">
                             <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-info" style="width: 90px;">Ver</a>
                             <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning" style="width: 90px;">Editar</a>
                             <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="d-inline" onsubmit="return confirm('Estas seguro de eliminar este cliente?')">
