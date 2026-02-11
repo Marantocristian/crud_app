@@ -31,9 +31,9 @@
                     <td>{{ Str::limit($cliente->direccion, 50) }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-info">Ver</a>
-                            <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning">Editar</a>
-                            <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="d-inline" onsubmit="return confirm('Estas seguro de eliminar este cliente?')">
+                            <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-info flex-grow-1">Ver</a>
+                            <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-sm btn-warning flex-grow-1">Editar</a>
+                            <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="d-inline flex-grow-1" onsubmit="return confirm('Estas seguro de eliminar este cliente?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
