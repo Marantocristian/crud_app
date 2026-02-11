@@ -25,10 +25,10 @@
                 @foreach($clientes as $cliente)
                 <tr>
                     <td>{{ $cliente->id }}</td>
-                    <td>{{ $cliente->full_name }}</td>
-                    <td>{{ $cliente->email }}</td>
-                    <td>{{ $cliente->phone }}</td>
-                    <td>{{ Str::limit($cliente->address, 50) }}</td>
+                    <td>{{ $cliente->nombre_completo }}</td>
+                    <td>{{ $cliente->correo }}</td>
+                    <td>{{ $cliente->telefono }}</td>
+                    <td>{{ Str::limit($cliente->direccion, 50) }}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-info">Ver</a>

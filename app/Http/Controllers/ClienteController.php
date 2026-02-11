@@ -5,23 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\ClienteModel;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
-use App\Services\ClienteService;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class ClienteController extends Controller
 {
-    protected ClienteService $clienteService;
-
-    public function __construct(ClienteService $clienteService)
+    public function index(): View
     {
-        $this->clienteService = $clienteService;
-    }
+        $clientes = ClienteModel::latest()->paginate(10);
 
-    public function index(Request $request): View
-    {
-        $clientes = $this->clienteService->getPaginatedClientes(10);
         return view('clientes.index', compact('clientes'));
     }
 
@@ -32,16 +24,10 @@ class ClienteController extends Controller
 
     public function store(StoreClienteRequest $request): RedirectResponse
     {
-        try {
-            $cliente = $this->clienteService->createCliente($request->validated());
+        $cliente = ClienteModel::create($request->validated());
 
-            return redirect()->route('clientes.index')
-                ->with('success', "Cliente {$cliente->nombre_completo} creado exitosamente.");
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Error al crear el cliente: ' . $e->getMessage());
-        }
+        return redirect()->route('clientes.index')
+            ->with('success', "Cliente {$cliente->nombre_completo} creado exitosamente.");
     }
 
     public function show(ClienteModel $cliente): View
@@ -56,29 +42,18 @@ class ClienteController extends Controller
 
     public function update(UpdateClienteRequest $request, ClienteModel $cliente): RedirectResponse
     {
-        try {
-            $updatedCliente = $this->clienteService->updateCliente($cliente, $request->validated());
+        $cliente->update($request->validated());
 
-            return redirect()->route('clientes.index')
-                ->with('success', "Cliente {$updatedCliente->nombre_completo} actualizado exitosamente.");
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Error al actualizar el cliente: ' . $e->getMessage());
-        }
+        return redirect()->route('clientes.index')
+            ->with('success', "Cliente {$cliente->nombre_completo} actualizado exitosamente.");
     }
 
     public function destroy(ClienteModel $cliente): RedirectResponse
     {
-        try {
-            $clienteName = $cliente->nombre_completo;
-            $this->clienteService->deleteCliente($cliente);
+        $clienteName = $cliente->nombre_completo;
+        $cliente->delete();
 
-            return redirect()->route('clientes.index')
-                ->with('success', "Cliente {$clienteName} eliminado exitosamente.");
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'Error al eliminar el cliente: ' . $e->getMessage());
-        }
+        return redirect()->route('clientes.index')
+            ->with('success', "Cliente {$clienteName} eliminado exitosamente.");
     }
 }

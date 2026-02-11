@@ -20,19 +20,19 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 fw-bold">Nombre Completo:</div>
-                    <div class="col-sm-9">{{ $cliente->full_name }}</div>
+                    <div class="col-sm-9">{{ $cliente->nombre_completo }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-sm-3 fw-bold">Email:</div>
-                    <div class="col-sm-9">{{ $cliente->email }}</div>
+                    <div class="col-sm-3 fw-bold">Correo:</div>
+                    <div class="col-sm-9">{{ $cliente->correo }}</div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 fw-bold">Telefono:</div>
-                    <div class="col-sm-9">{{ $cliente->phone }}</div>
+                    <div class="col-sm-9">{{ $cliente->telefono }}</div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 fw-bold">Direccion:</div>
-                    <div class="col-sm-9">{{ $cliente->address }}</div>
+                    <div class="col-sm-9">{{ $cliente->direccion }}</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3 fw-bold">Creado:</div>
