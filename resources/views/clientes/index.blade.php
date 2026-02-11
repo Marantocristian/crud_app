@@ -28,25 +28,26 @@
 
     .cliente-dark-table {
         margin-top: 1.25rem;
-        color: #0f172a;
-        border-color: #cbd5e1;
+        color: #e2e8f0;
+        border-color: #334155;
     }
 
     .cliente-dark-table th {
-        background: #f8fafc;
-        color: #0f172a;
+        background: #111f3a;
+        color: #ffffff;
         font-weight: 600;
-        border-bottom: 1px solid #cbd5e1;
+        border-bottom: 1px solid #334155;
     }
 
     .cliente-dark-table td {
-        background: #ffffff;
-        border-top: 1px solid #cbd5e1;
+        background: #172641;
+        color: #ffffff;
+        border-top: 1px solid #334155;
         vertical-align: middle;
     }
 
     .cliente-dark-table tr:hover td {
-        background: #f1f5f9;
+        background: #1d2f50;
     }
 
     .cliente-action-btn {
