@@ -5,10 +5,10 @@
 @section('content')
 <style>
     .cliente-create-shell {
-        background: #ffffff;
+        background: linear-gradient(135deg, #071226 0%, #0a1730 100%);
         border-radius: 12px;
         padding: 2rem;
-        color: #0f172a;
+        color: #f8fafc;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
     }
 
@@ -19,7 +19,7 @@
     }
 
     .cliente-create-shell .form-label {
-        color: #0f172a;
+        color: #f8fafc;
         font-weight: 600;
         margin-bottom: 0.55rem;
     }
