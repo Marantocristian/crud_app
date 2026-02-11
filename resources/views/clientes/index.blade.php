@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Lista de Clientes</h1>
-    <a href="{{ route('clientes.create') }}" class="btn btn-primary">Nuevo Cliente</a>
+    <a href="{{ route('clientes.create') }}" class="btn btn-primary">Crear Cliente</a>
 </div>
 
 @if($clientes->count() > 0)

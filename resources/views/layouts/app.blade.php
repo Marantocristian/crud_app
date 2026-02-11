@@ -19,7 +19,7 @@
                         <a class="nav-link {{ request()->routeIs('clientes.index') ? 'active' : '' }}" href="{{ route('clientes.index') }}">CLIENTES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('clientes.create') ? 'active' : '' }}" href="{{ route('clientes.create') }}">NUEVO CLIENTE</a>
+                        <a class="nav-link {{ request()->routeIs('clientes.create') ? 'active' : '' }}" href="{{ route('clientes.create') }}">CREAR CLIENTE</a>
                     </li>
                 </ul>
             </div>
