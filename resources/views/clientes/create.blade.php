@@ -5,10 +5,10 @@
 @section('content')
 <style>
     .cliente-create-shell {
-        background: linear-gradient(135deg, #071226 0%, #0a1730 100%);
+        background: #ffffff;
         border-radius: 12px;
         padding: 2rem;
-        color: #f8fafc;
+        color: #0f172a;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
     }
 
@@ -19,7 +19,7 @@
     }
 
     .cliente-create-shell .form-label {
-        color: #f8fafc;
+        color: #0f172a;
         font-weight: 600;
         margin-bottom: 0.55rem;
     }
@@ -60,7 +60,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-10 col-xl-9">
         <div class="cliente-create-shell">
-            <h2 class="cliente-create-title">Agregar un nuevo cliente</h2>
+            <h2 class="cliente-create-title">Crear cliente</h2>
             <form action="{{ route('clientes.store') }}" method="POST">
                 @csrf
 
@@ -120,7 +120,7 @@
                             id="direccion"
                             name="direccion"
                             placeholder="Direccion"
-                            rows="6"
+                            rows="3"
                         >{{ old('direccion') }}</textarea>
                         @error('direccion')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
