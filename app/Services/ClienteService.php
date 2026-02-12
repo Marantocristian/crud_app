@@ -31,7 +31,20 @@ class ClienteService
     public function deleteCliente(ClienteModel $cliente): bool
     {
         return DB::transaction(function () use ($cliente) {
-            return (bool) $cliente->delete();
+            $cliente->delete();
+            
+            
+            $clientes = ClienteModel::orderBy('id')->get();
+            
+            foreach ($clientes as $index => $cli) {
+                $cli->update(['id' => $index + 1]);
+            }
+            
+            
+            $maxId = ClienteModel::max('id') ?? 0;
+            DB::statement('ALTER SEQUENCE clientes_id_seq RESTART WITH ' . ($maxId + 1));
+            
+            return true;
         });
     }
 }
