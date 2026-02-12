@@ -133,6 +133,7 @@ Una vez que la aplicación esté corriendo en `http://localhost:8080`:
 
 ```
 crud_app/
+├── backup_db/crud_app
 ├── app/
 │   ├── Http/
 │   │   └── Controllers/
@@ -145,7 +146,7 @@ crud_app/
 ├── database/
 │   ├── migrations/
 │   │   ├── 2026_02_10_000000_create_clientes_table.php
-│   │   └── 2026_02_11_000001_renombrar_campos_clientes_a_espanol.php
+│   │   └── 2026_02_11_000001_database.php
 │   ├── seeders/
 │   └── ...
 ├── resources/
