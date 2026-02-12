@@ -1,59 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CRUD App - Aplicación Laravel de Gestión de Clientes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web para la gestión CRUD (Crear, Leer, Actualizar, Eliminar) de clientes con renumeración automática de IDs.
 
-## About Laravel
+## Características principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✅ **Crear** nuevos clientes con información completa
+- ✅ **Listar** todos los clientes en una tabla paginada
+- ✅ **Ver detalle** de cada cliente individual
+- ✅ **Editar** información de clientes existentes
+- ✅ **Eliminar** clientes con renumeración automática de IDs
+- ✅ Base de datos PostgreSQL
+- ✅ Interfaz Blade PHP con estilos CSS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Campos de cliente
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Cada cliente registra la siguiente información:
 
-## Learning Laravel
+- Nombre completo
+- Correo electrónico (único)
+- Teléfono (opcional)
+- Dirección (opcional)
+- Fecha de creación y actualización
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Antes de clonar y configurar el proyecto, asegúrese de tener instalado:
 
-## Laravel Sponsors
+- **PHP 8.2 o superior** - [descargar](https://www.php.net/downloads)
+- **Composer** - [descargar](https://getcomposer.org/download/)
+- **PostgreSQL 12 o superior** - [descargar](https://www.postgresql.org/download/)
+- **Node.js 18 o superior** (opcional, para compilar assets) - [descargar](https://nodejs.org/)
+- **Git** - [descargar](https://git-scm.com/)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Extensiones de PHP requeridas
 
-### Premium Partners
+- pdo
+- pdo_pgsql
+- openssl
+- mbstring
+- tokenizer
+- XML
+- Ctype
+- JSON
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Puede verificar las extensiones habilitadas ejecutando:
 
-## Contributing
+```bash
+php -m
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Pasos después de clonar (Configuración en una PC nueva)
 
-## Code of Conduct
+A continuación se muestran los pasos mínimos para dejar el proyecto funcionando tras clonar el repositorio.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clonar el repositorio y entrar en la carpeta
 
-## Security Vulnerabilities
+```bash
+git clone <https://github.com/Marantocristian/crud_app.git>
+```
+### 2. Instalar dependencias de PHP (Composer)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer install
+```
+### 3. Crear el archivo de entorno `.env` a partir del ejemplo
 
-## License
+```bash
+cp .env.example .env
+```
+### 4. Generar la clave de aplicación (APP_KEY)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan key:generate
+```
+### 5. Ajustar las variables de ambiente en `.env`
+
+Edite el archivo `.env` y configure al menos los siguientes valores:
+
+- `DB_DATABASE` - Nombre de la base de datos
+- `DB_USERNAME` - Usuario de PostgreSQL
+- `DB_PASSWORD` - Contraseña del usuario
+
+### 6. Iniciar servidor de desarrollo
+
+```bash
+php artisan serve --port=8080
+```
+
+La aplicación estará disponible en `http://localhost:8080`
+
+## Guía de uso rápida
+
+Una vez que la aplicación esté corriendo en `http://localhost:8080`:
+
+### Listar clientes
+- Acceda a la página principal que muestra todos los clientes registrados
+- Los clientes se muestran en una tabla paginada
+
+### Crear un nuevo cliente
+1. Haga clic en el botón "Crear Cliente"
+2. Complete los campos:
+   - **Nombre Completo** (requerido)
+   - **Correo** (requerido, debe ser único)
+   - **Teléfono** (opcional)
+   - **Dirección** (opcional)
+3. Haga clic en "Guardar"
+
+### Ver detalle de un cliente
+- En la tabla de clientes, haga clic en el nombre del cliente
+- Se mostrará la información completa
+
+### Editar un cliente
+1. En la tabla, haga clic en el botón "Editar" o acceda al detalle y haga clic en "Editar"
+2. Modifique los datos deseados
+3. Haga clic en "Actualizar"
+
+### Eliminar un cliente
+- En la tabla, haga clic en el botón "Eliminar"
+- Confirme la acción
+- Los IDs de los demás clientes se renumerarán automáticamente
+
+## Notas importantes
+
+- Si usa **PostgreSQL**, asegúrese de crear la base de datos y otorgar los permisos necesarios al usuario antes de ejecutar las migraciones.
+- Revise y ajuste los valores en `.env` según su entorno (credenciales, puertos, drivers).
+- En caso de encontrar errores de conexión a BD, verifique que PostgreSQL esté corriendo y que las credenciales sean correctas.
+- **Renumeración automática de IDs**: Cuando elimina un cliente, los IDs se renumeran automáticamente. Por ejemplo, si tiene clientes con IDs 1, 2, 3, 4, 5 y elimina el cliente 3, los IDs se ajustarán a 1, 2, 3, 4.
+- El correo electrónico es único, no puede haber dos clientes con el mismo email.
+- Los campos teléfono y dirección son opcionales.
+
+## Estructura del Proyecto
+
+```
+crud_app/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── ClienteController.php    # Controlador CRUD de clientes
+│   ├── Models/
+│   │   └── ClienteModel.php             # Modelo de cliente
+│   ├── Services/
+│   │   └── ClienteService.php           # Lógica de negocio
+│   └── ...
+├── database/
+│   ├── migrations/
+│   │   ├── 2026_02_10_000000_create_clientes_table.php
+│   │   └── 2026_02_11_000001_renombrar_campos_clientes_a_espanol.php
+│   ├── seeders/
+│   └── ...
+├── resources/
+│   ├── views/
+│   │   ├── clientes/
+│   │   │   ├── index.blade.php          # Lista de clientes
+│   │   │   ├── create.blade.php         # Formulario de creación
+│   │   │   ├── edit.blade.php           # Formulario de edición
+│   │   │   └── show.blade.php           # Detalle de cliente
+│   │   ├── layouts/
+│   │   └── ...
+│   ├── css/
+│   └── js/
+├── routes/
+│   ├── web.php                          # Rutas del CRUD
+│   └── ...
+├── .env                                 # Variables de entorno
+├── composer.json                        # Dependencias PHP
+├── package.json                         # Dependencias Node
+└── README.md                            # Este archivo
+```
+
+## Rutas disponibles
+
+La aplicación expone las siguientes rutas RESTful:
+
+| Método | Ruta | Controlador | Descripción |
+|--------|------|-------------|-------------|
+| GET | `/` | - | Redirige a listado de clientes |
+| GET | `/clientes` | `ClienteController@index` | Listar todos los clientes |
+| GET | `/clientes/crear` | `ClienteController@create` | Mostrar formulario de creación |
+| POST | `/clientes` | `ClienteController@store` | Guardar nuevo cliente |
+| GET | `/clientes/{cliente}` | `ClienteController@show` | Ver detalle de cliente |
+| GET | `/clientes/{cliente}/editar` | `ClienteController@edit` | Mostrar formulario de edición |
+| PUT | `/clientes/{cliente}` | `ClienteController@update` | Actualizar cliente |
+| DELETE | `/clientes/{cliente}` | `ClienteController@destroy` | Eliminar cliente |
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Haga un fork del proyecto
+2. Cree una rama para su feature (`git checkout -b feature/AmazingFeature`)
+3. Commit sus cambios (`git commit -m 'Agregar AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abra un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulte el archivo LICENSE para más detalles.
