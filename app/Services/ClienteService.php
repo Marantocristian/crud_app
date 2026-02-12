@@ -33,16 +33,17 @@ class ClienteService
         return DB::transaction(function () use ($cliente) {
             $cliente->delete();
             
-            
-            $clientes = ClienteModel::orderBy('id')->get();
-            
-            foreach ($clientes as $index => $cli) {
-                $cli->update(['id' => $index + 1]);
-            }
-            
-            
             $maxId = ClienteModel::max('id') ?? 0;
-            DB::statement('ALTER SEQUENCE clientes_id_seq RESTART WITH ' . ($maxId + 1));
+            
+            $connection = DB::getDriverName();
+            
+            if ($connection === 'mysql') {
+                DB::statement('ALTER TABLE clientes AUTO_INCREMENT = ' . ($maxId + 1));
+            } elseif ($connection === 'pgsql') {
+                DB::statement('ALTER SEQUENCE clientes_id_seq RESTART WITH ' . ($maxId + 1));
+            } elseif ($connection === 'sqlite') {
+                DB::statement('UPDATE sqlite_sequence SET seq = ' . $maxId . ' WHERE name = "clientes"');
+            }
             
             return true;
         });
