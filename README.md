@@ -29,7 +29,6 @@ Antes de clonar y configurar el proyecto, asegúrese de tener instalado:
 - **PHP 8.2 o superior** - [descargar](https://www.php.net/downloads)
 - **Composer** - [descargar](https://getcomposer.org/download/)
 - **PostgreSQL 12 o superior** - [descargar](https://www.postgresql.org/download/)
-- **Node.js 18 o superior** (opcional, para compilar assets) - [descargar](https://nodejs.org/)
 - **Git** - [descargar](https://git-scm.com/)
 
 ### Extensiones de PHP requeridas
