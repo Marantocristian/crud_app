@@ -7,8 +7,6 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class ClienteController extends Controller
 {
@@ -26,7 +24,15 @@ class ClienteController extends Controller
 
     public function store(StoreClienteRequest $request): RedirectResponse
     {
-        $cliente = ClienteModel::create($request->validated());
+        $cliente = new ClienteModel();
+        $cliente->fill($request->validated());
+
+        $availableId = $this->getFirstAvailableClienteId();
+        if ($availableId !== null) {
+            $cliente->id = $availableId;
+        }
+
+        $cliente->save();
 
         return redirect()->route('clientes.index')
             ->with('success', "Cliente {$cliente->nombre_completo} creado exitosamente.");
@@ -54,23 +60,23 @@ class ClienteController extends Controller
     {
         $clienteName = $cliente->nombre_completo;
         $cliente->delete();
-        $this->syncClienteAutoIncrement();
 
         return redirect()->route('clientes.index')
             ->with('success', "Cliente {$clienteName} eliminado exitosamente.");
     }
 
-    private function syncClienteAutoIncrement(): void
+    private function getFirstAvailableClienteId(): ?int
     {
-        $nextId = (int) ClienteModel::max('id') + 1;
-        $driver = Schema::getConnection()->getDriverName();
+        $ids = ClienteModel::orderBy('id')->pluck('id');
+        $expected = 1;
 
-        if ($driver === 'mysql') {
-            DB::statement("ALTER TABLE clientes AUTO_INCREMENT = {$nextId}");
+        foreach ($ids as $id) {
+            if ((int) $id !== $expected) {
+                return $expected;
+            }
+            $expected++;
         }
 
-        if ($driver === 'sqlite') {
-            DB::statement("UPDATE sqlite_sequence SET seq = ? WHERE name = 'clientes'", [$nextId - 1]);
-        }
+        return null;
     }
 }
