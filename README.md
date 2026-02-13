@@ -1,4 +1,4 @@
-# CRUD App (Laravel + PostgreSQL)
+# CRUD APP (Laravel + PostgreSQL)
 
 Aplicacion web CRUD para gestion de clientes.
 
@@ -47,15 +47,7 @@ composer install
 
 ## 3) Crear base de datos en PostgreSQL
 
-Abre `psql` con un usuario administrador y ejecuta:
-
-```sql
-CREATE DATABASE crud_app;
-```
-
-## 4) Configurar variables de entorno
-
-Crear `.env` desde el ejemplo:
+1. Crea `.env` desde el ejemplo:
 
 Linux/macOS:
 
@@ -63,45 +55,58 @@ Linux/macOS:
 cp .env.example .env
 ```
 
-Edita `.env` y revisa minimo estos valores:
+Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+2. Configura credenciales PostgreSQL en `.env`:
 
 ```env
-APP_NAME=CRUD_APP
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://127.0.0.1:8000
-
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=crud_app
 DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
-
-SESSION_DRIVER=database
-CACHE_STORE=database
-QUEUE_CONNECTION=database
 ```
 
-## 5) Generar la clave de aplicacion
+3. Crea la base:
 
-```bash
-php artisan key:generate
+```sql
+CREATE DATABASE crud_app;
 ```
 
-## 6) Ejecutar migraciones
+4. Elige una opcion:
+
+- Opcion A (recomendada, desde cero): ejecutar migraciones
 
 ```bash
 php artisan migrate
 ```
 
-Esto crea tablas de:
+- Opcion B (usar backup del proyecto): restaurar dump `backup_db/crud_app`
 
-- clientes
-- cache / cache_locks
-- sessions
+```powershell
+psql -h 127.0.0.1 -p 5432 -U tu_usuario -d crud_app -f .\backup_db\crud_app
+```
 
-## 7) Levantar el proyecto
+5. Si restauraste backup, limpia cache:
+
+```bash
+php artisan optimize:clear
+```
+
+Si usas backup completo, no ejecutes `php artisan migrate` despues (para evitar duplicados). Si no usas backup, si debes ejecutar migraciones.
+
+## 4) Generar la clave de aplicacion
+
+```bash
+php artisan key:generate
+```
+
+## 5) Levantar el proyecto
 ```bash
 php artisan serve
 ```
@@ -109,7 +114,6 @@ php artisan serve
 Abrir:
 
 - http://127.0.0.1:8000
-
 
 ## Rutas principales
 
@@ -175,4 +179,3 @@ backup_db/crud_app
 
 - El proyecto usa PostgreSQL por defecto.
 - Si vas a levantarlo en otra maquina, no copies `.env`; crea uno nuevo desde `.env.example`.
-
