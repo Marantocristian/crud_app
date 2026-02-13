@@ -5,23 +5,23 @@
 @section('content')
 <style>
     .cliente-index-shell {
-        background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 100%);
-        border: 1px solid #dbe2f1;
+        background: linear-gradient(135deg, #071226 0%, #0a1730 100%);
         border-radius: 16px;
         padding: 1.5rem;
-        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+        color: #f8fafc;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
     }
 
     .cliente-index-title {
         margin: 0;
         font-size: 1.85rem;
         font-weight: 700;
-        color: #0f172a;
+        color: #f8fafc;
     }
 
     .cliente-index-subtitle {
         margin: 0.35rem 0 0;
-        color: #475569;
+        color: #cbd5e1;
         font-size: 0.95rem;
     }
 
