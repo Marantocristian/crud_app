@@ -39,7 +39,7 @@
 
     .cliente-table-wrap {
         margin-top: 1rem;
-        border: 1px solid #dbe2f1;
+        border: 1px solid #334155;
         border-radius: 12px;
         overflow: hidden;
     }
@@ -49,27 +49,28 @@
     }
 
     .cliente-table th {
-        background: #f1f5f9;
-        color: #0f172a;
+        background: #111f3a;
+        color: #ffffff;
         font-weight: 700;
-        border-bottom: 1px solid #dbe2f1;
+        border-bottom: 1px solid #334155;
         white-space: nowrap;
     }
 
     .cliente-table td {
-        color: #1e293b;
-        border-top: 1px solid #e2e8f0;
+        background: #172641;
+        color: #ffffff;
+        border-top: 1px solid #334155;
         vertical-align: middle;
     }
 
     .cliente-table tr:hover td {
-        background: #f8fafc;
+        background: #1d2f50;
     }
 
     .cliente-id-badge {
         display: inline-block;
-        background: #e2e8f0;
-        color: #1e293b;
+        background: #2b3f63;
+        color: #f8fafc;
         border-radius: 999px;
         font-size: 0.8rem;
         font-weight: 700;
