@@ -10,7 +10,7 @@ class ClienteService
 {
     public function getPaginatedClientes(int $perPage = 10): LengthAwarePaginator
     {
-        return ClienteModel::latest()->paginate($perPage);
+        return ClienteModel::orderBy('id', 'asc')->paginate($perPage);
     }
 
     public function createCliente(array $data): ClienteModel
