@@ -18,7 +18,7 @@ class UpdateClienteRequest extends FormRequest
         return [
             'nombre_completo' => ['required', 'string', 'max:255'],
             'correo' => ['required', 'email', 'max:255', "unique:clientes,correo,{$clienteId}"],
-            'telefono' => ['nullable', 'string', 'max:50'],
+            'telefono' => ['nullable', 'string', 'max:50', "unique:clientes,telefono,{$clienteId}"],
             'direccion' => ['nullable', 'string', 'max:255']
         ];
     }
@@ -39,7 +39,8 @@ class UpdateClienteRequest extends FormRequest
             'nombre_completo.required' => 'El nombre completo es obligatorio.',
             'correo.required' => 'El correo es obligatorio.',
             'correo.email' => 'El correo no es valido.',
-            'correo.unique' => 'Ya existe otro cliente con este correo.'
+            'correo.unique' => 'Ya existe otro cliente con este correo.',
+            'telefono.unique' => 'Ya existe otro cliente con este telefono.'
         ];
     }
 }

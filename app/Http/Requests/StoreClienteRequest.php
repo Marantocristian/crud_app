@@ -16,7 +16,7 @@ class StoreClienteRequest extends FormRequest
         return [
             'nombre_completo' => ['required', 'string', 'max:255'],
             'correo' => ['required', 'email', 'max:255', 'unique:clientes,correo'],
-            'telefono' => ['nullable', 'string', 'max:50'],
+            'telefono' => ['nullable', 'string', 'max:50', 'unique:clientes,telefono'],
             'direccion' => ['nullable', 'string', 'max:255']
         ];
     }
@@ -37,7 +37,8 @@ class StoreClienteRequest extends FormRequest
             'nombre_completo.required' => 'El nombre completo es obligatorio.',
             'correo.required' => 'El correo es obligatorio.',
             'correo.email' => 'El correo no es valido.',
-            'correo.unique' => 'Ya existe un cliente con este correo.'
+            'correo.unique' => 'Ya existe un cliente con este correo.',
+            'telefono.unique' => 'Ya existe un cliente con este telefono.'
         ];
     }
 }
