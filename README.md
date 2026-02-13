@@ -1,198 +1,178 @@
-# CRUD App - Aplicación Laravel de Gestión de Clientes
+# CRUD App (Laravel + PostgreSQL)
 
-Aplicación web para la gestión CRUD (Crear, Leer, Actualizar, Eliminar) de clientes con renumeración automática de IDs.
+Aplicacion web CRUD para gestion de clientes.
 
-## Características principales
+## Stack del proyecto
 
-- ✅ **Crear** nuevos clientes con información completa
-- ✅ **Listar** todos los clientes en una tabla paginada
-- ✅ **Ver detalle** de cada cliente individual
-- ✅ **Editar** información de clientes existentes
-- ✅ **Eliminar** clientes con renumeración automática de IDs
-- ✅ Base de datos PostgreSQL
-- ✅ Interfaz Blade PHP con estilos CSS
+- PHP 8.2+
+- Laravel 12
+- PostgreSQL 12+
+- Node.js 18+ (recomendado 20 LTS)
+- Vite (assets frontend)
 
-## Campos de cliente
+## Requisitos previos
 
-Cada cliente registra la siguiente información:
+Instala en la maquina destino:
 
-- Nombre completo
-- Correo electrónico (único)
-- Teléfono (opcional)
-- Dirección (opcional)
-- Fecha de creación y actualización
+- Git
+- PHP 8.2 o superior
+- Composer
+- PostgreSQL
+- Node.js y npm
 
-## Requisitos
-
-Antes de clonar y configurar el proyecto, asegúrese de tener instalado:
-
-- **PHP 8.2 o superior** - [descargar](https://www.php.net/downloads)
-- **Composer** - [descargar](https://getcomposer.org/download/)
-- **PostgreSQL 12 o superior** - [descargar](https://www.postgresql.org/download/)
-- **Git** - [descargar](https://git-scm.com/)
-
-### Extensiones de PHP requeridas
-
-- pdo
-- pdo_pgsql
-- openssl
-- mbstring
-- tokenizer
-- XML
-- Ctype
-- JSON
-
-Puede verificar las extensiones habilitadas ejecutando:
+Verifica versiones:
 
 ```bash
-php -m
+php -v
+composer -V
+psql --version
+node -v
+npm -v
 ```
 
-## Pasos después de clonar (Configuración en una PC nueva)
-
-A continuación se muestran los pasos mínimos para dejar el proyecto funcionando tras clonar el repositorio.
-
-### 1. Clonar el repositorio y entrar en la carpeta
+## 1) Clonar el repositorio
 
 ```bash
-git clone <https://github.com/Marantocristian/crud_app.git>
+git clone https://github.com/Marantocristian/crud_app.git
+cd crud_app
 ```
-### 2. Instalar dependencias de PHP (Composer)
+
+## 2) Instalar dependencias
+
+Dependencias PHP:
 
 ```bash
 composer install
 ```
-### 3. Crear el archivo de entorno `.env` a partir del ejemplo
+
+## 3) Crear base de datos en PostgreSQL
+
+Abre `psql` con un usuario administrador y ejecuta:
+
+```sql
+CREATE DATABASE crud_app;
+```
+
+## 4) Configurar variables de entorno
+
+Crear `.env` desde el ejemplo:
+
+Linux/macOS:
 
 ```bash
 cp .env.example .env
 ```
-### 4. Generar la clave de aplicación (APP_KEY)
+
+Edita `.env` y revisa minimo estos valores:
+
+```env
+APP_NAME=CRUD_APP
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:8000
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=crud_app
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+
+SESSION_DRIVER=database
+CACHE_STORE=database
+QUEUE_CONNECTION=database
+```
+
+## 5) Generar la clave de aplicacion
 
 ```bash
 php artisan key:generate
 ```
-### 5. Ajustar las variables de ambiente en `.env`
 
-Edite el archivo `.env` y configure al menos los siguientes valores:
-
-- `DB_DATABASE` - Nombre de la base de datos
-- `DB_USERNAME` - Usuario de PostgreSQL
-- `DB_PASSWORD` - Contraseña del usuario
-
-### 6. Iniciar servidor de desarrollo
+## 6) Ejecutar migraciones
 
 ```bash
-php artisan serve --port=8080
+php artisan migrate
 ```
 
-La aplicación estará disponible en `http://localhost:8080`
+Esto crea tablas de:
 
-## Guía de uso rápida
+- clientes
+- cache / cache_locks
+- sessions
 
-Una vez que la aplicación esté corriendo en `http://localhost:8080`:
-
-### Listar clientes
-- Acceda a la página principal que muestra todos los clientes registrados
-- Los clientes se muestran en una tabla paginada
-
-### Crear un nuevo cliente
-1. Haga clic en el botón "Crear Cliente"
-2. Complete los campos:
-   - **Nombre Completo** (requerido)
-   - **Correo** (requerido, debe ser único)
-   - **Teléfono** (opcional)
-   - **Dirección** (opcional)
-3. Haga clic en "Guardar"
-
-### Ver detalle de un cliente
-- En la tabla de clientes, haga clic en el nombre del cliente
-- Se mostrará la información completa
-
-### Editar un cliente
-1. En la tabla, haga clic en el botón "Editar" o acceda al detalle y haga clic en "Editar"
-2. Modifique los datos deseados
-3. Haga clic en "Actualizar"
-
-### Eliminar un cliente
-- En la tabla, haga clic en el botón "Eliminar"
-- Confirme la acción
-- Los IDs de los demás clientes se renumerarán automáticamente
-
-## Notas importantes
-
-- Si usa **PostgreSQL**, asegúrese de crear la base de datos y otorgar los permisos necesarios al usuario antes de ejecutar las migraciones.
-- Revise y ajuste los valores en `.env` según su entorno (credenciales, puertos, drivers).
-- En caso de encontrar errores de conexión a BD, verifique que PostgreSQL esté corriendo y que las credenciales sean correctas.
-- **Renumeración automática de IDs**: Cuando elimina un cliente, los IDs se renumeran automáticamente. Por ejemplo, si tiene clientes con IDs 1, 2, 3, 4, 5 y elimina el cliente 3, los IDs se ajustarán a 1, 2, 3, 4.
-- El correo electrónico es único, no puede haber dos clientes con el mismo email.
-- Los campos teléfono y dirección son opcionales.
-
-## Estructura del Proyecto
-
-```
-crud_app/
-├── backup_db/crud_app
-├── app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       └── ClienteController.php    # Controlador CRUD de clientes
-│   ├── Models/
-│   │   └── ClienteModel.php             # Modelo de cliente
-│   ├── Services/
-│   │   └── ClienteService.php           # Lógica de negocio
-│   └── ...
-├── database/
-│   ├── migrations/
-│   │   ├── 2026_02_10_000000_create_clientes_table.php
-│   │   └── 2026_02_11_000001_database.php
-│   ├── seeders/
-│   └── ...
-├── resources/
-│   ├── views/
-│   │   ├── clientes/
-│   │   │   ├── index.blade.php          # Lista de clientes
-│   │   │   ├── create.blade.php         # Formulario de creación
-│   │   │   ├── edit.blade.php           # Formulario de edición
-│   │   │   └── show.blade.php           # Detalle de cliente
-│   │   ├── layouts/
-│   │   └── ...
-│   ├── css/
-│   └── js/
-├── routes/
-│   ├── web.php                          # Rutas del CRUD
-│   └── ...
-├── .env                                 # Variables de entorno
-├── composer.json                        # Dependencias PHP
-├── package.json                         # Dependencias Node
-└── README.md                            # Este archivo
+## 7) Levantar el proyecto
+```bash
+php artisan serve
 ```
 
-## Rutas disponibles
+Abrir:
 
-La aplicación expone las siguientes rutas RESTful:
+- http://127.0.0.1:8000
 
-| Método | Ruta | Controlador | Descripción |
-|--------|------|-------------|-------------|
-| GET | `/` | - | Redirige a listado de clientes |
-| GET | `/clientes` | `ClienteController@index` | Listar todos los clientes |
-| GET | `/clientes/crear` | `ClienteController@create` | Mostrar formulario de creación |
-| POST | `/clientes` | `ClienteController@store` | Guardar nuevo cliente |
-| GET | `/clientes/{cliente}` | `ClienteController@show` | Ver detalle de cliente |
-| GET | `/clientes/{cliente}/editar` | `ClienteController@edit` | Mostrar formulario de edición |
-| PUT | `/clientes/{cliente}` | `ClienteController@update` | Actualizar cliente |
-| DELETE | `/clientes/{cliente}` | `ClienteController@destroy` | Eliminar cliente |
 
-## Contribuciones
+## Rutas principales
 
-Las contribuciones son bienvenidas. Por favor:
+- `GET /` redirige a listado de clientes
+- `GET /clientes` listado
+- `GET /clientes/crear` formulario crear
+- `POST /clientes` guardar
+- `GET /clientes/{cliente}` detalle
+- `GET /clientes/{cliente}/editar` formulario editar
+- `PUT /clientes/{cliente}` actualizar
+- `DELETE /clientes/{cliente}` eliminar
 
-1. Haga un fork del proyecto
-2. Cree una rama para su feature (`git checkout -b feature/AmazingFeature`)
-3. Commit sus cambios (`git commit -m 'Agregar AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abra un Pull Request
+## Errores comunes y solucion
 
-## Licencia
+### Error: `Undefined table "sessions"`
 
-Este proyecto está bajo la licencia MIT. Consulte el archivo LICENSE para más detalles.
+Causa: `SESSION_DRIVER=database` y falta la tabla `sessions`.
+
+Solucion:
+
+```bash
+php artisan migrate
+php artisan optimize:clear
+```
+
+### Error de conexion a PostgreSQL
+
+Verificar:
+
+- Servicio PostgreSQL encendido
+- Credenciales correctas en `.env`
+- Base de datos existente (`crud_app`)
+- Puerto correcto (`5432`)
+
+### Cambios en `.env` no se reflejan
+
+Limpiar cache de Laravel:
+
+```bash
+php artisan optimize:clear
+```
+
+## Comandos utiles
+
+```bash
+php artisan route:list
+php artisan test
+php artisan migrate:fresh --seed
+```
+
+## Estructura base
+
+```text
+app/Http/Controllers/ClienteController.php
+app/Models/ClienteModel.php
+resources/views/clientes/
+routes/web.php
+database/migrations/
+backup_db/crud_app
+```
+
+## Notas
+
+- El proyecto usa PostgreSQL por defecto.
+- Si vas a levantarlo en otra maquina, no copies `.env`; crea uno nuevo desde `.env.example`.
+

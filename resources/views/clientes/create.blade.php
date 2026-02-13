@@ -60,7 +60,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-10 col-xl-9">
         <div class="cliente-create-shell">
-            <h2 class="cliente-create-title">Crear cliente</h2>
+            <h2 class="cliente-create-title">CREAR CLIENTE</h2>
             <form action="{{ route('clientes.store') }}" method="POST">
                 @csrf
 
