@@ -47,7 +47,7 @@ composer install
 
 En este proyecto tienes dos formas de configurar la base de datos.
 
-### A) Instalacion desde cero (recomendada)
+### A) Instalacion desde cero 
 
 1. Crear la base de datos en PostgreSQL:
 
@@ -109,7 +109,7 @@ php artisan optimize:clear
 
 Con esto la base queda lista.
 
-### B) Restaurar backup existente (opcional)
+### B) Restaurar backup existente 
 
 Si prefieres usar el respaldo incluido:
 
