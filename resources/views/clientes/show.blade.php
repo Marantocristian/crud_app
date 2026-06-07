@@ -52,6 +52,62 @@
         padding: 0.5rem 1rem;
         font-weight: 600;
     }
+
+    @media (max-width: 768px) {
+        .cliente-show-shell {
+            padding: 1.5rem 1rem;
+        }
+
+        .cliente-show-shell .d-flex.justify-content-between {
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .cliente-show-title {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .cliente-show-shell .d-flex.gap-2 {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .cliente-primary-btn, .cliente-secondary-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .cliente-show-table {
+            display: block;
+        }
+
+        .cliente-show-table tbody, .cliente-show-table tr, .cliente-show-table th, .cliente-show-table td {
+            display: block;
+            width: 100%;
+        }
+
+        .cliente-show-table tr {
+            margin-bottom: 1rem;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cliente-show-table th {
+            border: none;
+            border-bottom: 1px solid #334155;
+            background: #111f3a;
+            padding: 0.75rem 1rem;
+        }
+
+        .cliente-show-table td {
+            border: none;
+            padding: 0.75rem 1rem;
+        }
+    }
 </style>
 
 <div class="row justify-content-center">

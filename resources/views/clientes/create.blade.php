@@ -55,6 +55,23 @@
         font-weight: 600;
         min-width: 148px;
     }
+
+    @media (max-width: 768px) {
+        .cliente-create-shell {
+            padding: 1.5rem 1rem;
+        }
+
+        .cliente-create-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .cliente-submit-btn {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+    }
 </style>
 
 <div class="row justify-content-center">

@@ -68,6 +68,18 @@
             margin-top: 0.15rem;
             line-height: 1.1;
         }
+
+        @media (max-width: 991.98px) {
+            .app-nav-list {
+                margin-top: 1rem;
+                padding-top: 0.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .app-nav-link {
+                padding: 0.75rem 1rem !important;
+                margin-bottom: 0.25rem;
+            }
+        }
     </style>
 </head>
 <body>

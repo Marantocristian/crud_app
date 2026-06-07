@@ -102,16 +102,85 @@
 
     @media (max-width: 768px) {
         .cliente-index-shell {
-            padding: 1rem;
+            padding: 1.25rem 1rem;
         }
 
         .cliente-index-title {
             font-size: 1.5rem;
         }
 
+        .cliente-index-subtitle {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
         .cliente-primary-btn {
             width: 100%;
             margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: column;
+            align-items: stretch !important;
+        }
+        
+        .cliente-table thead {
+            display: none;
+        }
+        
+        .cliente-table, .cliente-table tbody, .cliente-table tr, .cliente-table td {
+            display: block;
+            width: 100%;
+        }
+
+        .cliente-table tr {
+            margin-bottom: 1rem;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .cliente-table td {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            border-top: none;
+            border-bottom: 1px solid #334155;
+            text-align: left;
+            gap: 0.35rem;
+            word-break: break-word;
+        }
+
+        .cliente-table td:last-child {
+            border-bottom: none;
+            align-items: stretch;
+            gap: 0.6rem;
+            padding-top: 1rem;
+        }
+
+        .cliente-table td::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #93c5fd;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+
+        .cliente-action-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        
+        .cliente-action-btn {
+            width: 100%;
+            justify-content: center;
         }
     }
 </style>
@@ -141,12 +210,12 @@
             <tbody>
                 @foreach($clientes as $cliente)
                 <tr>
-                    <td><span class="cliente-id-badge">#{{ $cliente->id }}</span></td>
-                    <td>{{ $cliente->nombre_completo }}</td>
-                    <td>{{ $cliente->correo }}</td>
-                    <td>{{ $cliente->telefono ?? 'Sin telefono' }}</td>
-                    <td>{{ Str::limit($cliente->direccion, 50) }}</td>
-                    <td>
+                    <td data-label="ID"><span class="cliente-id-badge">#{{ $cliente->id }}</span></td>
+                    <td data-label="Nombre Completo">{{ $cliente->nombre_completo }}</td>
+                    <td data-label="Email">{{ $cliente->correo }}</td>
+                    <td data-label="Telefono">{{ $cliente->telefono ?? 'Sin telefono' }}</td>
+                    <td data-label="Direccion">{{ Str::limit($cliente->direccion, 50) }}</td>
+                    <td data-label="Acciones">
                         <div class="cliente-action-group" role="group">
                             <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-sm btn-info cliente-action-btn text-white">
                                 <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -165,7 +234,7 @@
                             <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="d-inline" onsubmit="return confirm('Estas seguro de eliminar este cliente?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger cliente-action-btn">
+                                <button type="submit" class="btn btn-sm btn-danger cliente-action-btn w-100">
                                     <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                                         <path d="M6.5 1.5h3a1 1 0 0 1 1 1V3H14v1.5H2V3h3.5v-.5a1 1 0 0 1 1-1Zm-1 4.5h1.5v6H5.5V6Zm3 0H10v6H8.5V6Zm3 0H13v6h-1.5V6ZM3.5 5.5h9v8a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-8Z"/>
                                     </svg>

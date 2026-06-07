@@ -60,6 +60,29 @@
         padding: 0.62rem 1.3rem;
         font-weight: 600;
     }
+
+    @media (max-width: 768px) {
+        .cliente-edit-shell {
+            padding: 1.5rem 1rem;
+        }
+
+        .cliente-edit-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .col-12.d-flex.justify-content-between {
+            flex-direction: column-reverse;
+            gap: 0.75rem;
+        }
+
+        .cliente-primary-btn, .cliente-secondary-btn {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
+    }
 </style>
 
 <div class="row justify-content-center">
