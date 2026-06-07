@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,7 +12,11 @@ return new class extends Migration
             return;
         }
 
-        if ($this->constraintExists('clientes', 'clientes_telefono_unique')) {
+        // Usar el método nativo de Laravel (compatible con PostgreSQL, SQLite, MySQL)
+        $indexes = Schema::getIndexes('clientes');
+        $exists = collect($indexes)->contains(fn($i) => $i['name'] === 'clientes_telefono_unique');
+
+        if ($exists) {
             return;
         }
 
@@ -28,21 +31,15 @@ return new class extends Migration
             return;
         }
 
-        if (! $this->constraintExists('clientes', 'clientes_telefono_unique')) {
+        $indexes = Schema::getIndexes('clientes');
+        $exists = collect($indexes)->contains(fn($i) => $i['name'] === 'clientes_telefono_unique');
+
+        if (! $exists) {
             return;
         }
 
         Schema::table('clientes', function (Blueprint $table) {
             $table->dropUnique(['telefono']);
         });
-    }
-
-    private function constraintExists(string $table, string $constraint): bool
-    {
-        return DB::table('information_schema.table_constraints')
-            ->where('table_schema', 'public')
-            ->where('table_name', $table)
-            ->where('constraint_name', $constraint)
-            ->exists();
     }
 };
