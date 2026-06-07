@@ -1,33 +1,48 @@
 <?php
 
 /**
- * Entry point for Vercel serverless environment
- * Since Vercel has a read-only filesystem, we must redirect
- * the storage folders to the /tmp directory.
+ * Entry point for Vercel serverless environment.
+ * Vercel has a read-only filesystem except for /tmp,
+ * so we redirect Laravel's writable directories there.
  */
 
-// Directorios temporales requeridos por Laravel
-$tmpDirs = [
-    '/tmp/storage/framework/views',
-    '/tmp/storage/framework/cache',
+// ── 1. Crear directorios necesarios en /tmp ──────────────────────────────
+$directories = [
+    '/tmp/storage/app/public',
     '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
+    '/tmp/storage/framework/testing',
+    '/tmp/storage/framework/views',
+    '/tmp/storage/logs',
+    '/tmp/bootstrap/cache',
 ];
 
-foreach ($tmpDirs as $dir) {
+foreach ($directories as $dir) {
     if (!is_dir($dir)) {
-        mkdir($dir, 0777, true);
+        mkdir($dir, 0755, true);
     }
 }
 
-// Sobrescribir variables de entorno para usar /tmp
-putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
-putenv('SESSION_DRIVER=cookie');
-putenv('LOG_CHANNEL=stderr');
+// ── 2. Sobrescribir variables de entorno críticas para Vercel ────────────
+$overrides = [
+    'APP_ENV'            => 'production',
+    'APP_DEBUG'          => 'false',
+    'LOG_CHANNEL'        => 'stderr',
+    'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
+    'SESSION_DRIVER'     => 'cookie',
+    'CACHE_STORE'        => 'array',
+    'QUEUE_CONNECTION'   => 'sync',
+];
 
-$_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
-$_ENV['SESSION_DRIVER'] = 'cookie';
-$_ENV['LOG_CHANNEL'] = 'stderr';
+foreach ($overrides as $key => $value) {
+    putenv("$key=$value");
+    $_ENV[$key]    = $value;
+    $_SERVER[$key] = $value;
+}
 
-// Iniciar Laravel cargando el index.php público
+// ── 3. Apuntar el bootstrap/cache a /tmp ────────────────────────────────
+// Esto evita errores de escritura al cachear la configuración de Laravel
+define('LARAVEL_STORAGE_PATH', '/tmp/storage');
+
+// ── 4. Cargar Laravel ───────────────────────────────────────────────────
 require __DIR__ . '/../public/index.php';
